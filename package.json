@@ -9,6 +9,16 @@
   "categories": [
     "Programming Languages"
   ],
+  "publisher": "aplang",
+  "author": {
+        "name": "Vio-Eli"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/snowfoxsh/aplang",
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/snowfoxsh/aplang"
+    },
   "contributes": {
     "languages": [{
       "id": "aplang",
