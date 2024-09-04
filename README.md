@@ -1,65 +1,47 @@
-# ap README
+# ApLang extension for Visual Studio Code
 
-This is the README for your extension "aplang". After writing up a brief description, we recommend including the following sections.
+A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marketplace.visualstudio.com/VSCode) with basic syntax highlighting for [ApLang](https://github.com/snowfoxsh/aplang/tree/master), the AP Computer Science Principles Programming Language.
 
-## Features
+## Quick Start
+1. [Install Rust and ApLang](https://github.com/snowfoxsh/aplang/tree/master?tab=readme-ov-file#building)
+2. [Install the ApLang extension for Visual Studio Code](https://code.visualstudio.com/docs/editor/extension-marketplace)
+3. Open or create a new `.ap` file and start coding!
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Feature Details
+The ApLang extension provides syntax highlighting for the following language features:
 
-For example if there is an image subfolder under your extension project workspace:
+- **Imports**: Supports module imports using `IMPORT` and `MOD` keywords.
+- **Functions**: Highlights both function definitions and calls, with support for function parameters and exported functions (`EXPORT`).
+- **Control Flow**: Recognizes flow control keywords like `IF`, `ELSE`, `FOR`, `RETURN`, etc.
+- **Operators**: Logical operators (`AND`, `OR`, `NOT`), comparison operators (`=`, `!=`, `>`, `<`), and mathematical operators (`+`, `*`, `-`, `/`) are supported.
+- **Variables and Constants**: Highlights numeric constants, booleans, and variable names.
+- **Strings**: Supports both single-quoted and double-quoted string formats with interpolation.
+- **Comments**: Both single-line (`//`) and block comments (`/* */`) are highlighted, with support for nested block comments.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Planned Features
+- [ ] Intellisense
+- [ ] Linting
+- [ ] Code Formatting & Refactoring
+- [ ] Debugging
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Feature Request
+Please submit an issue ticket
 
-## Requirements
+## Contributing
+We welcome contributions to the APLang extension! Whether you're fixing bugs, adding new features, or improving documentation, your help is appreciated!
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+To make code changes:
 
-## Extension Settings
+1. Fork the repository.
+2. Create a new branch for your features or bug fixes.
+3. Write tests for your changes. (if applicable)
+4. Make sure all tests pass.
+5. Submit a pull request.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Standard stuff!
 
-For example:
+## License
+This project is licensed under the MIT License. If you need it under a different license *Contact Me*. MIT license support will always be maintained. Don't fear!
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## Credits
+This extension was created by [@vio-eli](https://github.com/vio-eli)
