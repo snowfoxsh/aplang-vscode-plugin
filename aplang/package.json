@@ -1,0 +1,25 @@
+{
+  "name": "aplang",
+  "displayName": "aplang",
+  "description": "Syntax highlighting for aplang",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "aplang",
+      "aliases": ["aplang", "ApLang"],
+      "extensions": [".ap"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "aplang",
+      "scopeName": "source.aplang",
+      "path": "./syntaxes/aplang.tmLanguage.json"
+    }]
+  }
+}

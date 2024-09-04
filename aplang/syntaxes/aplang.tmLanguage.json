@@ -1,0 +1,426 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "aplang",
+	"fileTypes": [
+		"ap"
+	],
+	"scopeName": "source.aplang",
+	"patterns": [
+		{
+            "comment": "external module imports",
+            "name": "meta.import.aplang",
+            "begin": "\\b(IMPORT|import)\\s+(MOD|mod)",
+            "beginCaptures": {
+                "1": {
+                    "name": "storage.type.aplang"
+                },
+                "2": {
+                    "name": "keyword.other.crate.aplang"
+                }
+            },
+            "end": ";|(?=\\n|$)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.semi.aplang"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#block-comments"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#punctuation"
+                }
+            ]
+        },
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#block-comments"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+            "include": "#punctuation"
+        },
+		{
+            "include": "#strings"
+        },
+		{
+            "include": "#variables"
+        }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"comment": "line comments",
+					"name": "comment.line.double-slash.aplang",
+					"match": "(//).*$",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.aplang"
+						}
+					}
+				}
+			]
+		},
+		"block-comments": {
+			"patterns": [
+				{
+                    "comment": "empty block comments",
+                    "name": "comment.block.aplang",
+                    "match": "/\\*\\*/"
+                },
+				{
+                    "comment": "block comments",
+                    "name": "comment.block.aplang",
+                    "begin": "/\\*(?!\\*)",
+                    "end": "\\*/",
+                    "patterns": [
+                        {
+                            "include": "#block-comments"
+                        }
+                    ]
+                }
+			]
+		},
+		"parameters": {
+			"patterns": [
+				{
+					"comment": "Function parameters",
+					"name": "variable.parameter.aplang",
+					"match": "\\b[A-Za-z0-9_]+\\b"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"comment": "Export a function",
+					"match": "\\b(EXPORT|export)",
+					"captures": {
+						"1": {
+							"name": "keyword.other.aplang"
+						}
+					}
+				},
+				{
+					"comment": "Function definition",
+					"name": "meta.function.definition.aplang",
+					"begin": "\\b(PROCEDURE|procedure)\\s+([A-Za-z0-9_]+)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.other.fn.aplang"
+						},
+						"2": {
+							"name": "entity.name.function.aplang"
+						},
+						"3": {
+							"name": "punctuation.brackets.round.aplang"
+						}
+					},
+					"end": "(\\{)",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.brackets.curly.aplang"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+                            "include": "#constants"
+                        },
+						{
+							"include": "#block-comments"
+						},
+						{
+							"include": "#functions"
+						},
+						{
+							"include": "#keywords"
+						},
+						{
+							"include": "#punctuation"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#variables"
+						},
+						{
+							"include": "#parameters"
+						}
+					]
+				},
+				{
+					"comment": "Function call",
+					"name": "meta.function.call.aplang",
+					"begin": "([A-Za-z0-9_]+)(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.aplang"
+						},
+						"2": {
+							"name": "punctuation.brackets.round.aplang"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.brackets.round.aplang"
+						}
+					},
+					"patterns": [
+						{
+                            "include": "#block-comments"
+                        },
+                        {
+                            "include": "#comments"
+                        },
+						{
+                            "include": "#constants"
+                        },
+						{
+                            "include": "#functions"
+                        },
+						{
+							"include": "#keywords"
+						},
+						{
+							"include": "#punctuation"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#parameters"
+						}
+					]
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"comment": "Control flow keywords",
+					"name": "keyword.control.aplang",
+					"match": "\\b(IF|if|ELSE|else|REPEAT|repeat|TIMES|times|UNTIL|until|FOR|for|EACH|each|IN|in|CONTINUE|continue|BREAK|break|RETURN|return)\\b"
+				},
+				{
+					"comment": "Function (procedure)",
+					"name": "keyword.other.fn.aplang",
+					"match": "\\b(PROCEDURE|procedure)\\b"
+				},
+				{
+					"comment": "Other keywords",
+					"name": "keyword.other.aplang",
+					"match": "\\b(EXPORT|export|IMPORT|import|FROM|from)\\b"
+				},
+				{
+					"comment": "Module",
+					"name": "keyword.other.module.aplang",
+					"match": "\\b(?<=(?:IMPORT|import)(?:\\s*))(MOD|mod)\\b"
+				},
+				{
+					"comment": "Logical operators",
+					"name": "keyword.operator.logical.aplang",
+					"match": "\\b(AND|and|OR|or|NOT|not)\\b"
+				},
+				{
+					"comment": "Assignment operators",
+					"name": "keyword.operator.assignment.aplang",
+					"match": "(<-)"
+				},
+				{
+                    "comment": "Comparison operators",
+                    "name": "keyword.operator.comparison.aplang",
+                    "match": "(=(=)?(?!>)|!=|<=|(?<!=)>=)"
+                },
+				{
+                    "comment": "Less than, greater than (special case)",
+                    "match": "(?:\\b|(?:(\\))|(\\])|(\\})))[ \\t]*([<>])[ \\t]*(?:\\b|(?:(\\()|(\\[)|(\\{)))",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.brackets.round.aplang"
+                        },
+                        "2": {
+                            "name": "punctuation.brackets.square.aplang"
+                        },
+                        "3": {
+                            "name": "punctuation.brackets.curly.aplang"
+                        },
+                        "4": {
+                            "name": "keyword.operator.comparison.aplang"
+                        },
+                        "5": {
+                            "name": "punctuation.brackets.round.aplang"
+                        },
+                        "6": {
+                            "name": "punctuation.brackets.square.aplang"
+                        },
+                        "7": {
+                            "name": "punctuation.brackets.curly.aplang"
+                        }
+                    }
+                },
+				{
+                    "comment": "Math operators",
+                    "name": "keyword.operator.math.aplang",
+                    "match": "(\\+|\\*)|(\\b(?:(MOD|mod))\\b)|((?<!<)-)|(/(?!/))"
+                }
+			]
+		},
+		"constants": {
+			"patterns": [
+                {
+                    "comment": "decimal integers and floats",
+                    "name": "constant.numeric.decimal.aplang",
+                    "match": "\\b\\d[\\d]*(\\.?)[\\d]*(?:(E|e)([+-]?)([\\d]+))?\\b",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.separator.dot.decimal.aplang"
+                        },
+                        "2": {
+                            "name": "keyword.operator.exponent.aplang"
+                        },
+                        "3": {
+                            "name": "keyword.operator.exponent.sign.aplang"
+                        },
+                        "4": {
+                            "name": "constant.numeric.decimal.exponent.mantissa.aplang"
+                        }
+                    }
+                },
+                {
+                    "comment": "booleans",
+                    "name": "variable.other.constant.aplang",
+                    "match": "\\b(true|TRUE|false|FALSE)\\b"
+                }
+            ]
+		},
+		"interpolations": {
+            "comment": "Curly brace interpolations",
+            "name": "meta.interpolation.aplang",
+            "match": "({)[^\"{}]*(})",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.interpolation.aplang"
+                },
+                "2": {
+                    "name": "punctuation.definition.interpolation.aplang"
+                }
+            }
+        },
+		"punctuation": {
+            "patterns": [
+                {
+                    "comment": "comma",
+                    "name": "punctuation.comma.aplang",
+                    "match": ","
+                },
+                {
+                    "comment": "curly braces",
+                    "name": "punctuation.brackets.curly.aplang",
+                    "match": "[{}]"
+                },
+                {
+                    "comment": "parentheses, round brackets",
+                    "name": "punctuation.brackets.round.aplang",
+                    "match": "[()]"
+                },
+                {
+                    "comment": "semicolon",
+                    "name": "punctuation.semi.aplang",
+                    "match": ";"
+                },
+                {
+                    "comment": "square brackets",
+                    "name": "punctuation.brackets.square.aplang",
+                    "match": "[\\[\\]]"
+                },
+                {
+                    "comment": "angle brackets",
+                    "name": "punctuation.brackets.angle.aplang",
+                    "match": "(?<!=)[<>]"
+                }
+            ]
+        },
+		"strings": {
+			"patterns": [
+				{
+                    "comment": "Double-quoted strings",
+                    "name": "string.quoted.double.rust",
+                    "begin": "\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.rust"
+                        }
+                    },
+                    "end": "\"",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.rust"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#escapes"
+                        },
+                        {
+                            "include": "#interpolations"
+                        }
+                    ]
+                },
+				{
+                    "comment": "Single quoted haracters and bytes",
+                    "name": "string.quoted.single.char.aplang",
+                    "begin": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.char.aplang"
+                        }
+                    },
+                    "end": "'",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.char.aplang"
+                        }
+                    }
+                }
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"comment": "Variables",
+					"name": "variable.other.aplang",
+					"match": "\\b(?<!(?<!\\.)\\.)[a-z0-9_]+\\b"
+				}
+			]
+		}
+	}
+}
