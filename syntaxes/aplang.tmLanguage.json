@@ -105,6 +105,28 @@
                 }
 			]
 		},
+		"escapes": {
+            "comment": "escapes: ASCII, byte, Unicode, quote, regex",
+            "name": "constant.character.escape.aplang",
+            "match": "(\\\\)(?:(?:(x[0-7][\\da-fA-F])|(u(\\{)[\\da-fA-F]{4,6}(\\}))|.))",
+            "captures": {
+                "1": {
+                    "name": "constant.character.escape.backslash.aplang"
+                },
+                "2": {
+                    "name": "constant.character.escape.bit.aplang"
+                },
+                "3": {
+                    "name": "constant.character.escape.unicode.aplang"
+                },
+                "4": {
+                    "name": "constant.character.escape.unicode.punctuation.aplang"
+                },
+                "5": {
+                    "name": "constant.character.escape.unicode.punctuation.aplang"
+                }
+            }
+        },
 		"parameters": {
 			"patterns": [
 				{
@@ -373,17 +395,17 @@
 			"patterns": [
 				{
                     "comment": "Double-quoted strings",
-                    "name": "string.quoted.double.rust",
+                    "name": "string.quoted.double.aplang",
                     "begin": "\"",
                     "beginCaptures": {
                         "0": {
-                            "name": "punctuation.definition.string.rust"
+                            "name": "punctuation.definition.string.aplang"
                         }
                     },
                     "end": "\"",
                     "endCaptures": {
                         "0": {
-                            "name": "punctuation.definition.string.rust"
+                            "name": "punctuation.definition.string.aplang"
                         }
                     },
                     "patterns": [
@@ -409,7 +431,12 @@
                         "0": {
                             "name": "punctuation.definition.char.aplang"
                         }
-                    }
+                    },
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
                 }
 			]
 		},
