@@ -13,8 +13,8 @@
   "author": {
         "name": "Vio-Eli"
   },
-  "license": "MIT",
-  "homepage": "https://github.com/snowfoxsh/aplang",
+  "license": "GPL-3.0-only",
+  "homepage": "https://aplang.org/",
   "repository": {
         "type": "git",
         "url": "https://github.com/snowfoxsh/aplang"
